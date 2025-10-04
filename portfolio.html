@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio - Web Developer</title>
-    <link rel="stylesheet" href="portfolio-style.css">
+    <link rel="stylesheet" href="./portfolio-style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Fallback styles in case CSS doesn't load */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea, #764ba2); }
+        .hero-content { text-align: center; color: white; padding: 20px; }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -44,11 +50,11 @@
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Your Name</span></h1>
+                <h1 class="hero-title">Hi, I'm <span class="highlight">आपका नाम</span></h1>
                 <h2 class="hero-subtitle">Full Stack Web Developer</h2>
                 <p class="hero-description">
-                    I create beautiful, responsive websites and web applications using modern technologies.
-                    Passionate about clean code and great user experiences.
+                    मैं आधुनिक तकनीकों का उपयोग करके सुंदर, responsive websites और web applications बनाता हूं।
+                    Clean code और बेहतरीन user experiences के लिए passionate हूं।
                 </p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -309,6 +315,13 @@
         </div>
     </footer>
 
-    <script src="portfolio-script.js"></script>
+    <script src="./portfolio-script.js"></script>
+    <script>
+        // Fallback check
+        console.log('Portfolio loaded!');
+        if (!document.querySelector('.hero')) {
+            document.body.innerHTML = '<div style="text-align:center;padding:50px;"><h1>Portfolio Loading...</h1><p>Files are being loaded...</p></div>';
+        }
+    </script>
 </body>
 </html>
