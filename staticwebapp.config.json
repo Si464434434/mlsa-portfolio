@@ -6,7 +6,7 @@
     },
     {
       "route": "/*",
-      "serve": "/portfolio.html",
+      "serve": "/index.html",
       "statusCode": 200
     }
   ],
@@ -24,7 +24,7 @@
       "statusCode": 200
     },
     "404": {
-      "redirect": "/portfolio.html",
+      "redirect": "/index.html",
       "statusCode": 200
     }
   },
