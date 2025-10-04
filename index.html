@@ -1,1036 +1,654 @@
-<!DOCTYPE html> <!DOCTYPE html>
-
-<html lang="en"><html lang="en">
-
-<head><head>
-
-  <meta charset="UTF-8" />  <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>SIH 25031 - Civic Issues Reporting System</title>  <title>25031</title>
-
-  <meta name="description" content="Digital platform for reporting and tracking civic issues in Jharkhand">  <link rel="stylesheet" href="style.css"/>
-
-  <link rel="stylesheet" href="style.css"/>  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script></head>
-
-</head><body>
-
-<body>  <!-- Header -->
-
-  <!-- Header -->  <header class="header">
-
-  <header class="header">    <div class="container header-content">
-
-    <div class="container header-content">      <div class="logo">
-
-      <div class="logo">        <img id="siteLogo" src="WhatsApp Image 2025-09-12 at 12.24.31 PM.jpeg" alt="Civic Logo" />
-
-        <img id="siteLogo" src="WhatsApp Image 2025-09-12 at 12.24.31 PM.jpeg" alt="Civic Logo" />        <h1 class="site-title">Civic</h1>
-
-        <h1 class="site-title">Civic</h1>        <div class="logo-media">
-
-        <div class="logo-media">          <span class="tagline">SIH 25031</span>
-
-          <span class="tagline">SIH 25031</span>        </div>
-
-        </div>      </div>
-
-      </div>      <div class="header-actions">
-
-      <div class="header-actions">        <button id="emergencyBtn" class="btn btn--danger btn--sm">🚨 Emergency</button>
-
-        <button id="emergencyBtn" class="btn btn--danger btn--sm">🚨 Emergency</button>        <button id="themeToggle" class="btn btn--outline btn--sm">🌙</button>
-
-        <button id="themeToggle" class="btn btn--outline btn--sm">🌙</button>        <button id="languageToggle" class="btn btn--outline btn--sm">🌐 HI</button>
-
-        <button id="languageToggle" class="btn btn--outline btn--sm">🌐 HI</button>        <select id="languageSelect" class="btn btn--outline btn--sm" aria-label="Select language">
-
-        <select id="languageSelect" class="btn btn--outline btn--sm" aria-label="Select language">          <option value="en">English</option>
-
-          <option value="en">English</option>          <option value="en">HR</option>
-
-          <option value="en">HR</option>          <option value="en">Spane</option>
-
-          <option value="en">Spane</option>          <option value="hi">हिन्दी</option>
-
-          <option value="hi">हिन्दी</option>        </select>
-
-        </select>        <button id="backToHome" class="btn btn--secondary btn--sm hidden">← Home</button>
-
-        <button id="backToHome" class="btn btn--secondary btn--sm hidden">← Home</button>      </div>
-
-      </div>    </div>
-
-    </div>    <!-- Navigation Bar -->
-
-    <!-- Navigation Bar -->    <nav class="main-nav">
-
-    <nav class="main-nav">      <div class="container">
-
-      <div class="container">        <ul class="nav-links">
-
-        <ul class="nav-links">          <li><a href="#" class="nav-link active" id="nav-home">Home</a></li>
-
-          <li><a href="#" class="nav-link active" id="nav-home">Home</a></li>          <li><a href="#" class="nav-link" id="nav-services">Services</a></li>
-
-          <li><a href="#" class="nav-link" id="nav-services">Services</a></li>          <li><a href="#" class="nav-link" id="nav-about">About Us</a></li>
-
-          <li><a href="#" class="nav-link" id="nav-about">About Us</a></li>          <li><a href="#" class="nav-link" id="nav-contact">Contact</a></li>
-
-          <li><a href="#" class="nav-link" id="nav-contact">Contact</a></li>          <li class="dropdown">
-
-          <li class="dropdown">            <a href="#" class="nav-link dropdown-toggle">Quick Access</a>
-
-            <a href="#" class="nav-link dropdown-toggle">Quick Access</a>            <div class="dropdown-menu">
-
-            <div class="dropdown-menu">              <a href="#" class="dropdown-item" id="nav-report-issue">Report Issue</a>
-
-              <a href="#" class="dropdown-item" id="nav-report-issue">Report Issue</a>              <a href="#" class="dropdown-item" id="nav-track-issue">Track Issue</a>
-
-              <a href="#" class="dropdown-item" id="nav-track-issue">Track Issue</a>              <a href="#" class="dropdown-item" id="nav-emergency">Emergency Contact</a>
-
-              <a href="#" class="dropdown-item" id="nav-emergency">Emergency Contact</a>            </div>
-
-            </div>          </li>
-
-          </li>        </ul>
-
-        </ul>        <div class="search-container">
-
-        <div class="search-container">          <input type="text" placeholder="Search..." class="search-input">
-
-          <input type="text" placeholder="Search..." class="search-input">          <button class="btn btn--primary btn--sm search-btn">🔍</button>
-
-          <button class="btn btn--primary btn--sm search-btn">🔍</button>        </div>
-
-        </div>      </div>
-
-      </div>    </nav>
-
-    </nav>  </header>
-
-  </header>
-
-  <main class="main">
-
-  <main class="main">    <!-- Jharkhand Promotion Slideshow - COMPLETE REWRITE -->
-
-    <!-- Jharkhand Promotion Slideshow -->    <section id="jharkhandPromotion" class="slideshow-container">
-
-    <section id="jharkhandPromotion" class="slideshow-container">      <h2 class="slideshow-title" data-i18n="jharkhand_heading">Progress & Promise — Jharkhand: Improvement & Respect</h2>
-
-      <h2 class="slideshow-title" data-i18n="jharkhand_heading">Progress & Promise — Jharkhand: Improvement & Respect</h2>
-
-      <!-- New simple slideshow implementation (7 slides) -->
-
-      <div class="simple-slideshow">      <div class="simple-slideshow">
-
-        <div class="slide-wrapper">        <div class="slide-wrapper">
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="jharkhand-removebg-preview.png" alt="Woman observing a scenic landscape in Jharkhand">            <img src="jharkhand-removebg-preview.png"Woman observing a scenic landscape in Jharkhand">
-
-            <div class="slide-caption">Incredible Tourism Destinations</div>            <div class="slide-caption">Incredible Tourism Destinations</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="3.webp" alt="Jharkhand Infrastructure">            <img src="3.webp" alt="Jharkhand Infrastructure">
-
-            <div class="slide-caption">Modern Infrastructure Development</div>            <div class="slide-caption">Modern Infrastructure Development</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="5.webp" alt="Jharkhand Culture">            <img src="5.webp" alt="Jharkhand Culture">
-
-            <div class="slide-caption">Rich Cultural Heritage</div>            <div class="slide-caption">Rich Cultural Heritage</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="6.jpg" alt="Jharkhand Industry">            <img src="6.jpg" alt="Jharkhand Industry">
-
-            <div class="slide-caption">Industrial Growth & Innovation</div>            <div class="slide-caption">Industrial Growth & Innovation</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="7.jpg" alt="Jharkhand Agriculture">            <img src="7.jpg" alt="Jharkhand Agriculture">
-
-            <div class="slide-caption">Agricultural Advancements</div>            <div class="slide-caption">Agricultural Advancements</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="darkest-black-colors.png" alt="Jharkhand Education">            <img src="darkest-black-colors.png" alt="Jharkhand Education">
-
-            <div class="slide-caption">Educational Excellence</div>            <div class="slide-caption">Educational Excellence</div>
-
-          </div>          </div>
-
-          <div class="slide-item">          <div class="slide-item">
-
-            <img src="images.jpg" alt="Jharkhand Technology">            <img src="images.jpg" alt="Jharkhand Technology">
-
-            <div class="slide-caption">Technological Innovations</div>            <div class="slide-caption">Technological Innovations</div>
-
-          </div>          </div>
-
-        </div>        </div>
-
-
-
-        <button class="slide-prev" id="slidePrev">&#10094;</button>        <!-- Navigation controls -->
-
-        <button class="slide-next" id="slideNext">&#10095;</button>        <button class="slide-prev" id="slidePrev">&#10094;</button>
-
-        <div class="slide-indicators" id="slideIndicators"></div>        <button class="slide-next" id="slideNext">&#10095;</button>
-
-      </div>
-
-    </section>        <!-- Slide indicators -->
-
-        <div class="slide-indicators" id="slideIndicators"></div>
-
-    <!-- Gallery Section -->      </div>
-
-    <section class="slider-section" id="gallery">    </section>
-
-      <h2>Viewport</h2>    <!-- Waste Management Interface -->
-
-      <div class="slider">    <section id="wasteInterface" class="interface hidden">
-
-        <div class="slide-track">      <div class="container">
-
-          <div class="slide"><img src="6.jpg" alt="Civic Image 1" /></div>        <h2>Waste Management</h2>
-
-          <div class="slide"><img src="2.jpg" alt="Civic Image 2" /></div>        <p>Report illegal dumping, missed collections, or track waste collection vehicles.</p>
-
-          <div class="slide"><img src="3.webp" alt="Civic Image 3" /></div>
-
-          <div class="slide"><img src="5.webp" alt="Civic Image 4" /></div>        <div class="waste-grid">
-
-          <div class="slide"><img src="7.jpg" alt="Civic Image 5" /></div>          <div class="waste-form">
-
-        </div>            <form id="wasteForm" class="waste-report-form">
-
-      </div>              <label for="wasteTitle">Title</label>
-
-    </section>              <input type="text" id="wasteTitle" placeholder="e.g., Garbage dumped near lake" required>
-
-
-
-    <!-- Landing Page -->              <label for="wasteLocation">Location</label>
-
-    <section id="landingPage" class="landing-page">              <input type="text" id="wasteLocation" placeholder="Place name or coordinates" required>
-
-      <div class="container hero">
-
-        <h2 data-i18n="select_role">Select Your Role</h2>              <label for="wasteType">Type</label>
-
-        <p>Help improve your community by reporting civic issues and tracking their resolution.</p>              <select id="wasteType">
-
-        <div class="role-selection">                <option value="illegal_dumping">Illegal Dumping</option>
-
-          <div class="role-card" id="citizenRole">                <option value="missed_collection">Missed Collection</option>
-
-            <div class="role-icon">👥</div>                <option value="overflowing_bin">Overflowing Bin</option>
-
-            <h3 data-i18n="citizen">I'm a Citizen</h3>                <option value="hazardous_waste">Hazardous Waste</option>
-
-            <p>Report issues, track progress, and engage with your community</p>              </select>
-
-            <button class="btn btn--primary btn--full-width">Get Started</button>
-
-          </div>              <label for="wasteDesc">Description</label>
-
-          <div class="role-card" id="adminRole">              <textarea id="wasteDesc" rows="4" placeholder="Describe the issue" required></textarea>
-
-            <div class="role-icon">🏛️</div>
-
-            <h3 data-i18n="admin">I'm an Administrator</h3>              <label for="wasteVehicle">Vehicle (optional)</label>
-
-            <p>Manage issues, route to departments, and monitor performance</p>              <input type="text" id="wasteVehicle" placeholder="Vehicle number if seen (e.g., MH12AB1234)">
-
-            <button class="btn btn--primary btn--full-width">Access Dashboard</button>
-
-          </div>              <button class="btn btn--primary" id="wasteSubmit">Report Waste</button>
-
-          <div class="role-card" id="tourismRole">            </form>
-
-            <div class="role-icon">🏞️</div>          </div>
-
-            <h3>Tourism Reporter</h3>
-
-            <p>Report tourism-related issues and track visitor experiences</p>          <div class="waste-feed">
-
-            <button class="btn btn--primary btn--full-width">Tourism Portal</button>            <h3>Recent Waste Reports</h3>
-
-          </div>            <div id="wasteFeedList">No reports yet.</div>
-
-          <div class="role-card" id="wasteManagementRole">
-
-            <div class="role-icon">🚛</div>            <h3>Tracked Vehicles</h3>
-
-            <h3>Waste Management</h3>            <div id="wasteVehiclesList">No vehicles tracked.</div>
-
-            <p>Track garbage collection vehicles and manage waste disposal</p>          </div>
-
-            <button class="btn btn--primary btn--full-width">Track Fleet</button>        </div>
-
-          </div>
-
-          <div class="role-card" id="utilityRole">        <button id="wasteBack" class="btn btn--secondary">Back</button>
-
-            <div class="role-icon">⚡</div>      </div>
-
-            <h3>Utility Monitor</h3>    </section>
-
-            <p>Track meter units and utility infrastructure maintenance</p>    <!-- Utility Monitor Interface -->
-
-            <button class="btn btn--primary btn--full-width">Monitor Utilities</button>    <section id="utilityInterface" class="interface hidden">
-
-          </div>      <div class="container">
-
-          <div class="role-card" id="govDocsRole">        <h2>Utility Monitor</h2>
-
-            <div class="role-icon">📑</div>        <p>Track meter readings and report infrastructure maintenance issues.</p>
-
-            <h3>Government Documents</h3>
-
-            <p>Driving Licence, RTO, PAN/Aadhaar, Bank Documents, Gas Agency</p>        <div class="utility-grid">
-
-            <button class="btn btn--primary btn--full-width" id="openGovDocs">Open Documents</button>          <div class="utility-forms">
-
-          </div>            <h3>Submit Meter Reading</h3>
-
-          <div class="role-card" id="transportRole">            <form id="meterForm">
-
-            <div class="role-icon">🚊</div>              <label for="meterId">Meter ID</label>
-
-            <h3>MRT Operations</h3>              <input type="text" id="meterId" placeholder="e.g., MTR-001" required>
-
-            <p>Monitor transit operations and report maintenance issues</p>
-
-            <button class="btn btn--primary btn--full-width">Transit Dashboard</button>              <label for="meterValue">Reading (units)</label>
-
-          </div>              <input type="number" id="meterValue" placeholder="e.g., 1234" required>
-
-          <div class="role-card" id="advertisingRole">
-
-            <div class="role-icon">📊</div>              <label for="meterLocation">Location</label>
-
-            <h3>LED Billboard Manager</h3>              <input type="text" id="meterLocation" placeholder="Area or ward" required>
-
-            <p>Monitor and maintain digital advertising infrastructure</p>
-
-            <button class="btn btn--primary btn--full-width">Billboard Portal</button>              <button class="btn btn--primary" id="meterSubmit">Submit Reading</button>
-
-          </div>            </form>
-
-        </div>
-
-      </div>            <h3>Report Maintenance Issue</h3>
-
-            <form id="utilityIssueForm">
-
-      <div class="container stats-overview">              <label for="utilityTitle">Title</label>
-
-        <div class="stat-item"><span class="stat-number">1,247</span><span class="stat-label">Issues Reported</span></div>              <input type="text" id="utilityTitle" placeholder="e.g., Transformer sparking" required>
-
-        <div class="stat-item"><span class="stat-number">1,089</span><span class="stat-label">Issues Resolved</span></div>
-
-        <div class="stat-item"><span class="stat-number">2.8 days</span><span class="stat-label">Avg Resolution Time</span></div>              <label for="utilityIssueLocation">Location</label>
-
-        <div class="stat-item"><span class="stat-number">4.2★</span><span class="stat-label">Citizen Satisfaction</span></div>              <input type="text" id="utilityIssueLocation" placeholder="Place or coordinates" required>
-
-      </div>
-
-    </section>              <label for="utilitySeverity">Severity</label>
-
-              <select id="utilitySeverity">
-
-    <!-- Citizen Interface -->                <option value="low">Low</option>
-
-    <section id="citizenInterface" class="interface hidden">                <option value="medium">Medium</option>
-
-      <div class="container">                <option value="high">High</option>
-
-        <h2>Citizen Dashboard</h2>              </select>
-
-        <div class="tab-navigation">
-
-          <button class="tab-btn active" data-tab="report" data-i18n="report_issue">Report</button>              <label for="utilityDesc">Description</label>
-
-          <button class="tab-btn" data-tab="track" data-i18n="my_reports">My Reports</button>              <textarea id="utilityDesc" rows="3" placeholder="Describe the maintenance issue" required></textarea>
-
-          <button class="tab-btn" data-tab="map" data-i18n="map">Community Map</button>
-
-          <button class="tab-btn" data-tab="engage" data-i18n="community">Community</button>              <button class="btn btn--primary" id="utilityIssueSubmit">Report Issue</button>
-
-          <button class="tab-btn" data-tab="facilities" data-i18n="government_facilities">Gov Facilities</button>            </form>
-
-        </div>          </div>
-
-        <div id="reportTab" class="tab-content active">
-
-          <form id="issueReportForm" class="issue-report-form" data-api="issue">          <div class="utility-lists">
-
-            <input type="text" id="issueTitle" name="title" placeholder="Issue Title" required/>            <h3>Recent Meter Readings</h3>
-
-            <select id="issueCategory" name="category" required>            <div id="meterReadingsList">No readings yet.</div>
-
-              <option value="roads">🚧 Roads & Mining</option>
-
-              <option value="water">🚰 Water & Sanitation</option>            <h3>Maintenance Reports</h3>
-
-              <option value="electricity">💡 Electricity & Streetlights</option>            <div id="utilityReportsList">No reports yet.</div>
-
-              <option value="health">🏥 Health & Ambulance</option>          </div>
-
-              <option value="education">🎓 Education (Schools)</option>        </div>
-
-              <option value="farming">🧑‍🌾 Farmer Support</option>
-
-              <option value="ration">🍚 PDS / Ration Issues</option>        <button id="utilityBack" class="btn btn--secondary">Back</button>
-
-              <option value="environment">🌳 Environment & Forest</option>      </div>
-
-              <option value="safety">🚨 Women & Child Safety</option>    </section>
-
-              <option value="transport">🚌 Transport</option>    <!-- Government Documents Interface -->
-
-              <option value="potholes">Potholes</option>    <section id="govDocsInterface" class="interface hidden">
-
-              <option value="streetlights">Streetlights</option>      <div class="container">
-
-              <option value="garbage">Garbage</option>        <h2>Government Documents</h2>
-
-            </select>        <p>Quick links and instructions for Driving Licence, PAN/Aadhaar, Bank KYC, and Gas Agency services.</p>
-
-            <textarea id="issueDescription" name="description" placeholder="Describe the issue..." required></textarea>
-
-            <input type="text" id="issueLocation" name="location" placeholder="Location" required/>        <div class="gov-cards">
-
-            <button type="button" id="useGPSLocation" class="btn btn--outline">📍 Use My Location</button>          <div class="gov-card">
-
-            <select id="issuePriority" name="priority" required>            <h3>Driving Licence / RTO</h3>
-
-              <option value="low">Low</option>            <p>Apply for learner's licence, driving licence renewal and vehicle registration at the RTO.</p>
-
-              <option value="medium" selected>Medium</option>            <a href="https://parivahan.gov.in/" target="_blank" class="btn">Visit Parivahan</a>
-
-              <option value="high">High</option>          </div>
-
-              <option value="urgent">Urgent</option>          <div class="gov-card">
-
-            </select>            <h3>PAN / Aadhaar</h3>
-
-            <input type="file" id="issuePhoto" name="photo" accept="image/*"/>            <p>Find links for PAN card services and Aadhaar updates.</p>
-
-            <input type="text" id="userName" name="name" placeholder="Your Name" required/>            <a href="https://www.tin-nsdl.com/" target="_blank" class="btn">PAN Services</a>
-
-            <input type="email" id="userEmail" name="email" placeholder="Your Email" required/>            <a href="https://uidai.gov.in/" target="_blank" class="btn">Aadhaar</a>
-
-            <input type="tel" id="userPhone" name="phone" placeholder="Your Phone (optional)"/>          </div>
-
-            <button type="submit" class="btn btn--primary" data-i18n="submit">Submit Report</button>          <div class="gov-card">
-
-          </form>            <h3>Bank Documents (KYC)</h3>
-
-        </div>            <p>Guidance for bank KYC, updates, and dispute resolution.</p>
-
-        <div id="trackTab" class="tab-content"></div>            <a href="#" class="btn">Bank KYC Help</a>
-
-        <div id="mapTab" class="tab-content"><div id="communityMap" class="map-container"></div></div>          </div>
-
-        <div id="engageTab" class="tab-content"><div id="communityIssues"></div></div>          <div class="gov-card">
-
-        <div id="facilitiesTab" class="tab-content">            <h3>Gas Agency Registrations</h3>
-
-          <div id="facilitiesContainer" class="facilities-container"></div>            <p>Find your local gas agency contact details for bookings and complaints.</p>
-
-        </div>            <a href="#" class="btn">Find Gas Agency</a>
-
-      </div>          </div>
-
-    </section>        </div>
-
-
-
-    <!-- Other sections would continue here... -->        <button id="govDocsBack" class="btn btn--secondary">Back</button>
-
-          </div>
-
-  </main>    </section>
-
-    <!-- MRT Operations Interface -->
-
-  <!-- Footer -->    <section id="mrtInterface" class="interface hidden">
-
-  <footer class="footer">      <div class="container">
-
-    <div class="container">        <h2>MRT Operations</h2>
-
-      <div class="footer-content">        <p>Monitor transit operations and report maintenance issues for trains and tracks.</p>
-
-        <div class="footer-section">
-
-          <h3>Contact Jharkhand Government</h3>        <div class="mrt-grid">
-
-          <ul class="contact-list">          <div class="mrt-dashboard">
-
-            <li><i class="icon">📧</i> Email: <a href="mailto:jharkhandcm@gov.in">jharkhandcm@gov.in</a></li>            <h3>System Status</h3>
-
-            <li><i class="icon">📞</i> Helpline: 1800-345-6789</li>            <div id="mrtStatus">All systems nominal</div>
-
-            <li><i class="icon">🏢</i> Secretariat: Project Building, Dhurwa, Ranchi - 834004</li>            <h4>Active Trains</h4>
-
-          </ul>            <div id="mrtTrainsList">No active trains.</div>
-
-        </div>          </div>
-
-        
-
-        <div class="footer-section">          <div class="mrt-forms">
-
-          <h3>Department Contacts</h3>            <h3>Report Maintenance Issue</h3>
-
-          <ul class="contact-list">            <form id="mrtIssueForm">
-
-            <li><i class="icon">🚧</i> Roads & Mining: <a href="mailto:roads.jharkhand@gov.in">roads.jharkhand@gov.in</a></li>              <label for="mrtLine">Line/Route</label>
-
-            <li><i class="icon">🚰</i> Water & Sanitation: <a href="mailto:water.jharkhand@gov.in">water.jharkhand@gov.in</a></li>              <input type="text" id="mrtLine" placeholder="e.g., Line 1" required>
-
-            <li><i class="icon">💡</i> Electricity: <a href="mailto:electricity.jharkhand@gov.in">electricity.jharkhand@gov.in</a></li>
-
-            <li><i class="icon">🏥</i> Health: <a href="mailto:health.jharkhand@gov.in">health.jharkhand@gov.in</a></li>              <label for="mrtVehicle">Train/Vehicle ID (if known)</label>
-
-          </ul>              <input type="text" id="mrtVehicle" placeholder="e.g., Train-07">
-
-        </div>
-
-              <label for="mrtLocation">Location</label>
-
-        <div class="footer-section">              <input type="text" id="mrtLocation" placeholder="Station or coordinates" required>
-
-          <h3>Social Media</h3>
-
-          <div class="social-links">              <label for="mrtSeverity">Severity</label>
-
-            <a href="https://twitter.com/JharkhandCMO" class="social-link"><i class="social-icon">🐦</i> Twitter</a>              <select id="mrtSeverity">
-
-            <a href="https://www.facebook.com/JharkhandGovernment" class="social-link"><i class="social-icon">👍</i> Facebook</a>                <option value="low">Low</option>
-
-            <a href="https://www.instagram.com/jharkhandgovernment" class="social-link"><i class="social-icon">📸</i> Instagram</a>                <option value="medium">Medium</option>
-
-            <a href="https://www.linkedin.com/company/government-of-jharkhand" class="social-link"><i class="social-icon">💼</i> LinkedIn</a>                <option value="high">High</option>
-
-            <a href="https://www.youtube.com/channel/jharkhandgov" class="social-link"><i class="social-icon">▶️</i> YouTube</a>              </select>
-
-          </div>
-
-        </div>              <label for="mrtDesc">Description</label>
-
-      </div>              <textarea id="mrtDesc" rows="3" placeholder="Describe the maintenance issue" required></textarea>
-
-      
-
-      <div class="footer-bottom">              <button class="btn btn--primary" id="mrtIssueSubmit">Report Issue</button>
-
-        <div class="quick-links">            </form>
-
-          <a href="#">Privacy Policy</a>          </div>
-
-          <a href="#">Terms of Service</a>        </div>
-
-          <a href="#">Accessibility</a>
-
-          <a href="#">RTI</a>        <button id="mrtBack" class="btn btn--secondary">Back</button>
-
-        </div>      </div>
-
-        <p class="copyright">© 2025 Government of Jharkhand. All rights reserved.</p>    </section>
-
-      </div>    <!-- MRT Operations Interface -->
-
-    </div>    <section id="mrtInterface" class="interface hidden">
-
-  </footer>      <div class="container">
-
-        <h2>MRT Operations</h2>
-
-  <!-- Emergency Services Panel -->        <p>Monitor transit vehicles, report incidents, and request maintenance.</p>
-
-  <div id="emergencyPanel" class="emergency-panel hidden">
-
-    <div class="emergency-panel-header">        <div class="mrt-grid">
-
-      <h3>Emergency Services</h3>          <div class="mrt-forms">
-
-      <button id="closeEmergencyPanel" class="btn btn--sm close-btn">×</button>            <h3>Report Incident / Maintenance</h3>
-
-    </div>            <form id="mrtReportForm">
-
-    <div class="emergency-panel-content">              <label for="mrtTitle">Title</label>
-
-      <div class="emergency-disclaimer">              <input type="text" id="mrtTitle" placeholder="e.g., Broken signal at Station 4" required>
-
-        <p><strong>Important:</strong> In case of a real emergency, please dial the appropriate emergency number directly from your phone.</p>
-
-      </div>              <label for="mrtVehicle">Vehicle ID (optional)</label>
-
-      <div id="emergencyServicesContainer" class="emergency-services-container"></div>              <input type="text" id="mrtVehicle" placeholder="e.g., MRT-12">
-
-      <div class="emergency-categories">
-
-        <button class="emergency-category-btn active" data-category="all">All</button>              <label for="mrtLocation">Location</label>
-
-        <button class="emergency-category-btn" data-category="police">Police</button>              <input type="text" id="mrtLocation" placeholder="Station or coordinates" required>
-
-        <button class="emergency-category-btn" data-category="fire">Fire</button>
-
-        <button class="emergency-category-btn" data-category="medical">Medical</button>              <label for="mrtSeverity">Severity</label>
-
-        <button class="emergency-category-btn" data-category="helpline">Helplines</button>              <select id="mrtSeverity">
-
-        <button class="emergency-category-btn" data-category="disaster">Disaster</button>                <option value="low">Low</option>
-
-      </div>                <option value="medium">Medium</option>
-
-    </div>                <option value="high">High</option>
-
-  </div>              </select>
-
-
-
-  <!-- Notification Container -->              <label for="mrtDesc">Description</label>
-
-  <div id="notificationContainer" class="notification-container"></div>              <textarea id="mrtDesc" rows="4" placeholder="Describe the incident or maintenance need" required></textarea>
-
-
-
-  <script src="script.js"></script>              <button class="btn btn--primary" id="mrtSubmit">Submit Report</button>
-
-  <script>            </form>
-
-    // Show message that PHP backend is not active          </div>
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-      const notification = document.createElement('div');          <div class="mrt-lists">
-
-      notification.style.cssText = `            <h3>Active Vehicles</h3>
-
-        position: fixed;            <div id="mrtVehiclesList">No vehicles tracked.</div>
-
-        top: 20px;
-
-        right: 20px;            <h3>Recent MRT Reports</h3>
-
-        background: #ff9800;            <div id="mrtReportsList">No reports yet.</div>
-
-        color: white;          </div>
-
-        padding: 15px;        </div>
-
-        border-radius: 5px;
-
-        z-index: 10000;        <button id="mrtBack" class="btn btn--secondary">Back</button>
-
-        max-width: 300px;      </div>
-
-        font-weight: bold;    </section>
-
-      `;
-
-      notification.innerHTML = `    <!-- Gallery Section with Automatic Sliding -->
-
-        <strong>⚠️ PHP Backend Not Active</strong><br>    <section class="slider-section" id="gallery">
-
-        Install XAMPP to enable full functionality.<br>      <h2>Viewport</h>
-
-        <small>Check ERROR-FIX.md for instructions.</small>      </div>
-
-      `;      <div class="slider">
-
-      document.body.appendChild(notification);        <div class="slide-track">
-
-                <div class="slide"><img src="6.jpg" alt="Haircut Style" /></div>
-
-      // Auto remove after 10 seconds          <div class="slide"><img src="2.jpg" alt="Beard Trim" /></div>
-
-      setTimeout(() => {          <div class="slide"><img src="3.webp" alt="Studio Interior" /></div>
-
-        if (notification.parentNode) {          <div class="slide"><img src="5.webp" alt="Shave Finish" /></div>
-
-          notification.remove();          <div class="slide"><img src="6.jpg" alt="Haircut Style" /></div>
-
-        }          <div class="slide"><img src="7.jpg" alt="Beard Trim" /></div>
-
-      }, 10000);          <!-- Duplicate for infinite scroll -->
-
-    });          <div class="slide"><img src="6.jpg" alt="Haircut Style" /></div>
-
-  </script>          <div class="slide"><img src="7.jpg" alt="Beard Trim" /></div>
-
-</body>          <div class="slide"><img src="3.webp" alt="Studio Interior" /></div>
-
-</html>          <div class="slide"><img src="5.webp" alt="Shave Finish" /></div>
-          <div class="slide"><img src="1.htm" alt="Haircut Style" /></div>
-          <div class="slide"><img src="2.jpg" alt="Beard Trim" /></div>
-        </div>
-    </section>
-
-    <!-- Landing Page -->
-    <section id="landingPage" class="landing-page">
-      <div class="container hero">
-        <h2 data-i18n="select_role">Select Your Role</h2>
-        <p>Help improve your community by reporting civic issues and tracking their resolution.</p>
-        <div class="role-selection">
-          <div class="role-card" id="citizenRole">
-            <div class="role-icon">👥</div>
-            <h3 data-i18n="citizen">I'm a Citizen</h3>
-            <p>Report issues, track progress, and engage with your community</p>
-            <button class="btn btn--primary btn--full-width">Get Started</button>
-          </div>
-          <div class="role-card" id="adminRole">
-            <div class="role-icon">🏛️</div>
-            <h3 data-i18n="admin">I'm an Administrator</h3>
-            <p>Manage issues, route to departments, and monitor performance</p>
-            <button class="btn btn--primary btn--full-width">Access Dashboard</button>
-          </div>
-          <div class="role-card" id="tourismRole">
-            <div class="role-icon">🏞️</div>
-            <h3>Tourism Reporter</h3>
-            <p>Report tourism-related issues and track visitor experiences</p>
-            <button class="btn btn--primary btn--full-width">Tourism Portal</button>
-          </div>
-          <div class="role-card" id="wasteManagementRole">
-            <div class="role-icon">🚛</div>
-            <h3>Waste Management</h3>
-            <p>Track garbage collection vehicles and manage waste disposal</p>
-            <button class="btn btn--primary btn--full-width">Track Fleet</button>
-          </div>
-          <div class="role-card" id="utilityRole">
-            <div class="role-icon">⚡</div>
-            <h3>Utility Monitor</h3>
-            <p>Track meter units and utility infrastructure maintenance</p>
-            <button class="btn btn--primary btn--full-width">Monitor Utilities</button>
-          </div>
-          <div class="role-card" id="govDocsRole">
-            <div class="role-icon">📑</div>
-            <h3>Government Documents</h3>
-            <p>Driving Licence, RTO, PAN/Aadhaar, Bank Documents, Gas Agency</p>
-            <button class="btn btn--primary btn--full-width" id="openGovDocs">Open Documents</button>
-          </div>
-          <div class="role-card" id="transportRole">
-            <div class="role-icon">🚊</div>
-            <h3>MRT Operations</h3>
-            <p>Monitor transit operations and report maintenance issues</p>
-            <button class="btn btn--primary btn--full-width">Transit Dashboard</button>
-          </div>
-          <div class="role-card" id="advertisingRole">
-            <div class="role-icon">📊</div>
-            <h3>LED Billboard Manager</h3>
-            <p>Monitor and maintain digital advertising infrastructure</p>
-            <button class="btn btn--primary btn--full-width">Billboard Portal</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="container stats-overview">
-        <div class="stat-item"><span class="stat-number">1,247</span><span class="stat-label">Issues Reported</span></div>
-        <div class="stat-item"><span class="stat-number">1,089</span><span class="stat-label">Issues Resolved</span></div>
-        <div class="stat-item"><span class="stat-number">2.8 days</span><span class="stat-label">Avg Resolution Time</span></div>
-        <div class="stat-item"><span class="stat-number">4.2★</span><span class="stat-label">Citizen Satisfaction</span></div>
-      </div>
-    </section>
-
-    <!-- Citizen Interface -->
-    <section id="citizenInterface" class="interface hidden">
-      <div class="container">
-        <h2>Citizen Dashboard</h2>
-        <div class="tab-navigation">
-          <button class="tab-btn active" data-tab="report" data-i18n="report_issue">Report</button>
-          <button class="tab-btn" data-tab="track" data-i18n="my_reports">My Reports</button>
-          <button class="tab-btn" data-tab="map" data-i18n="map">Community Map</button>
-          <button class="tab-btn" data-tab="engage" data-i18n="community">Community</button>
-          <button class="tab-btn" data-tab="facilities" data-i18n="government_facilities">Gov Facilities</button>
-        </div>
-        <div id="reportTab" class="tab-content active">
-          <form id="issueReportForm" class="issue-report-form">
-            <input type="text" id="issueTitle" placeholder="Issue Title" required/>
-            <select id="issueCategory" required>
-              <option value="roads">🚧 Roads & Mining</option>
-              <option value="water">🚰 Water & Sanitation</option>
-              <option value="electricity">💡 Electricity & Streetlights</option>
-              <option value="health">🏥 Health & Ambulance</option>
-              <option value="education">🎓 Education (Schools)</option>
-              <option value="farming">🧑‍🌾 Farmer Support</option>
-              <option value="ration">🍚 PDS / Ration Issues</option>
-              <option value="environment">🌳 Environment & Forest</option>
-              <option value="safety">🚨 Women & Child Safety</option>
-              <option value="transport">🚌 Transport</option>
-              <option value="potholes">Potholes</option>
-              <option value="streetlights">Streetlights</option>
-              <option value="garbage">Garbage</option>
-            </select>
-            <textarea id="issueDescription" placeholder="Describe the issue..." required></textarea>
-            <input type="text" id="issueLocation" placeholder="Location" required/>
-            <button type="button" id="useGPSLocation" class="btn btn--outline">📍 Use My Location</button>
-            <select id="issuePriority" required>
-              <option value="low">Low</option>
-              <option value="medium" selected>Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>
-            </select>
-            <input type="file" id="issuePhoto" accept="image/*"/>
-            <button type="submit" class="btn btn--primary" data-i18n="submit">Submit Report</button>
-          </form>
-        </div>
-        <div id="trackTab" class="tab-content"></div>
-        <div id="mapTab" class="tab-content"><div id="communityMap" class="map-container"></div></div>
-        <div id="engageTab" class="tab-content"><div id="communityIssues"></div></div>
-        <div id="facilitiesTab" class="tab-content">
-          <div id="facilitiesContainer" class="facilities-container">
-            <!-- Government facilities will be rendered here -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Admin Interface -->
-    <section id="adminInterface" class="interface hidden">
-      <div class="container">
-        <h2>Admin Dashboard</h2>
-        <div class="tab-navigation">
-          <button class="tab-btn active" data-tab="overview">Overview</button>
-          <button class="tab-btn" data-tab="manage">Manage Issues</button>
-          <button class="tab-btn" data-tab="departments">Departments</button>
-          <button class="tab-btn" data-tab="analytics">Analytics</button>
-          <button class="tab-btn" data-tab="admin-map">Map View</button>
-        </div>
-        <div id="overviewTab" class="tab-content active">
-          <h3>Dashboard Overview</h3>
-          <div class="dashboard-summary">
-            <div class="summary-cards">
-              <div class="summary-card">
-                <div class="summary-icon">📊</div>
-                <div class="summary-data">
-                  <span class="summary-value" id="totalIssuesValue">0</span>
-                  <span class="summary-label">Total Issues</span>
-                </div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-icon">⏳</div>
-                <div class="summary-data">
-                  <span class="summary-value" id="pendingIssuesValue">0</span>
-                  <span class="summary-label">Pending Issues</span>
-                </div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-icon">🔄</div>
-                <div class="summary-data">
-                  <span class="summary-value" id="inProgressIssuesValue">0</span>
-                  <span class="summary-label">In Progress</span>
-                </div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-icon">✅</div>
-                <div class="summary-data">
-                  <span class="summary-value" id="resolvedIssuesValue">0</span>
-                  <span class="summary-label">Resolved Issues</span>
-                </div>
-              </div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मेरा Portfolio - Web Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .highlight {
+            color: #f093fb;
+            font-weight: 700;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #f093fb;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 8rem;
+            color: white;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 8px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #764ba2;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portfolio</h2>
             </div>
-          </div>
-          
-          <div id="issuesChart"></div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
-        <div id="manageTab" class="tab-content"><div id="issuesTable"></div></div>
-        <div id="departmentsTab" class="tab-content"><div id="departmentsList"></div></div>
-        <div id="analyticsTab" class="tab-content"><canvas id="departmentPerformanceChart"></canvas></div>
-        <div id="admin-mapTab" class="tab-content"><div id="adminMap" class="map-container"></div></div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">आपका नाम</span></h1>
+            <h2>Full Stack Web Developer</h2>
+            <p>मैं आधुनिक तकनीकों का उपयोग करके सुंदर, responsive websites और web applications बनाता हूं। Clean code और बेहतरीन user experiences के लिए passionate हूं।</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">🚀 My Work देखें</a>
+                <a href="#contact" class="btn btn-secondary">📧 Contact करें</a>
+                <a href="#" class="btn btn-secondary">📄 Resume Download</a>
+            </div>
+        </div>
     </section>
 
-    <!-- Tourism Interface -->
-    <section id="tourismInterface" class="interface hidden">
-      <div class="container">
-        <h2>Tourism Reporter</h2>
-        <p>Report issues at tourist sites or leave feedback about your visit.</p>
-
-        <div class="tourism-panel">
-          <form id="tourismForm" class="tourism-form">
-            <label for="tourTitle">Title</label>
-            <input type="text" id="tourTitle" name="title" placeholder="Short title (e.g., Broken bench at waterfall)" required>
-
-            <label for="tourLocation">Location</label>
-            <input type="text" id="tourLocation" name="location" placeholder="Place name or coordinates" required>
-
-            <label for="tourType">Type</label>
-            <select id="tourType" name="type">
-              <option value="safety">Safety Issue</option>
-              <option value="cleanliness">Cleanliness</option>
-              <option value="facility">Facility/Infrastructure</option>
-              <option value="feedback">General Feedback</option>
-            </select>
-
-            <label for="tourDesc">Description</label>
-            <textarea id="tourDesc" name="description" rows="4" placeholder="Describe the issue or your feedback" required></textarea>
-
-            <label for="tourContact">Contact (optional)</label>
-            <input type="text" id="tourContact" name="contact" placeholder="Phone or email (optional)">
-
-            <button class="btn btn--primary" id="tourismSubmit">Submit Report</button>
-          </form>
-
-          <div class="tourism-feed">
-            <h3>Recent Tourism Reports & Feedback</h3>
-            <div id="tourismFeedList">No reports yet.</div>
-          </div>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>मैं एक passionate web developer हूं जो modern technologies का उपयोग करके innovative web solutions बनाता हूं। मेरा experience frontend और backend दोनों में है।</p>
+                    <p>मैं हमेशा नई technologies सीखने और अपने skills को improve करने में interested रहता हूं। Clean, maintainable code लिखना और best practices follow करना मेरी priority है।</p>
+                    <p>मेरा goal है user-friendly applications बनाना जो न केवल functional हों बल्कि visually appealing भी हों।</p>
+                </div>
+                <div class="about-image">
+                    <div class="profile-img">
+                        👨‍💻
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <button id="tourismBack" class="btn btn--secondary">Back</button>
-      </div>
     </section>
-  </main>
 
-  <!-- Notifications -->
-  <div id="notificationContainer" class="notification-container"></div>
-  
-  <!-- Real-time Updates System -->
-  <div id="realTimeUpdatesContainer" class="real-time-updates-container">
-    <div class="real-time-header">
-      <h4>Live Updates</h4>
-      <button id="closeRealTimeUpdates" class="btn btn--sm">×</button>
-    </div>
-    <div id="realTimeUpdatesList" class="real-time-updates-list">
-      <!-- Real-time updates will be inserted here dynamically -->
-    </div>
-    <div class="real-time-footer">
-      <span id="lastUpdatedTime">Last updated: Just now</span>
-    </div>
-  </div>
-  
-  <!-- Jharkhand Government Contact Information and Social Media Links -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Contact Jharkhand Government</h3>
-          <ul class="contact-list">
-            <li><i class="icon">📧</i> Email: <a href="mailto:jharkhandcm@gov.in">jharkhandcm@gov.in</a></li>
-            <li><i class="icon">📞</i> Helpline: 1800-345-6789</li>
-            <li><i class="icon">🏢</i> Secretariat: Project Building, Dhurwa, Ranchi - 834004</li>
-          </ul>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i>🌐</i>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
+                </div>
+                <div class="skill-card">
+                    <i>⚙️</i>
+                    <h3>Backend</h3>
+                    <p>Node.js, PHP, Python, Express.js</p>
+                </div>
+                <div class="skill-card">
+                    <i>🗄️</i>
+                    <h3>Database</h3>
+                    <p>MySQL, MongoDB, PostgreSQL</p>
+                </div>
+                <div class="skill-card">
+                    <i>☁️</i>
+                    <h3>Cloud</h3>
+                    <p>Azure, AWS, Docker, CI/CD</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer-section">
-          <h3>Department Contacts</h3>
-          <ul class="contact-list">
-            <li><i class="icon">🚧</i> Roads & Mining: <a href="mailto:roads.jharkhand@gov.in">roads.jharkhand@gov.in</a></li>
-            <li><i class="icon">🚰</i> Water & Sanitation: <a href="mailto:water.jharkhand@gov.in">water.jharkhand@gov.in</a></li>
-            <li><i class="icon">💡</i> Electricity: <a href="mailto:electricity.jharkhand@gov.in">electricity.jharkhand@gov.in</a></li>
-            <li><i class="icon">🏥</i> Health: <a href="mailto:health.jharkhand@gov.in">health.jharkhand@gov.in</a></li>
-          </ul>
-        </div>
+    </section>
 
-        <div class="footer-section">
-          <h3>Social Media</h3>
-          <div class="social-links">
-            <a href="https://twitter.com/JharkhandCMO" class="social-link"><i class="social-icon">🐦</i> Twitter</a>
-            <a href="https://www.facebook.com/JharkhandGovernment" class="social-link"><i class="social-icon">👍</i> Facebook</a>
-            <a href="https://www.instagram.com/jharkhandgovernment" class="social-link"><i class="social-icon">📸</i> Instagram</a>
-            <a href="https://www.linkedin.com/company/government-of-jharkhand" class="social-link"><i class="social-icon">💼</i> LinkedIn</a>
-            <a href="https://www.youtube.com/channel/jharkhandgov" class="social-link"><i class="social-icon">▶️</i> YouTube</a>
-          </div>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">🛒</div>
+                    <div class="project-content">
+                        <h3>E-Commerce Website</h3>
+                        <p>Complete online store with payment integration, user authentication, and admin panel.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3>Task Management App</h3>
+                        <p>Responsive web app for managing tasks with real-time updates and collaboration features.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">🎨</div>
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+                        <p>Modern, responsive portfolio website with smooth animations and Azure deployment.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live Demo</a>
+                            <a href="#" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <div class="quick-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Accessibility</a>
-          <a href="#">RTI</a>
-        </div>
-        <p class="copyright">© 2025 Government of Jharkhand. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-  
-  <!-- AI Chatbot Widget -->
-  <div id="chatbotWidget" class="chatbot-widget">
-    <div class="chatbot-button" id="chatbotToggle">
-      <div class="chatbot-icon">🤖</div>
-    </div>
-    <div class="chatbot-container hidden" id="chatbotContainer">
-      <div class="chatbot-header">
-        <h3>CivicAI Assistant</h3>
-        <button id="closeChatbot" class="btn btn--sm close-btn">×</button>
-      </div>
-      <div class="chatbot-messages" id="chatbotMessages">
-        <div class="message bot-message">
-          <div class="message-avatar">🤖</div>
-          <div class="message-content">
-            <p>नमस्ते! मैं सिविक असिस्टेंट हूँ। मैं आपकी कैसे सहायता कर सकता हूँ?</p>
-            <p>Hello! I'm your Civic Assistant. How can I help you today?</p>
-          </div>
-        </div>
-      </div>
-      <div class="chatbot-input">
-        <input type="text" id="chatbotInput" placeholder="Type your question here..." />
-        <button id="sendMessage" class="btn btn--primary btn--sm">Send</button>
-      </div>
-      <div class="chatbot-suggestions">
-        <button class="suggestion-chip" data-query="How to report an issue?">How to report an issue?</button>
-        <button class="suggestion-chip" data-query="Track my complaint">Track my complaint</button>
-        <button class="suggestion-chip" data-query="Emergency contacts">Emergency contacts</button>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Emergency Services Panel -->
-  <div id="emergencyPanel" class="emergency-panel hidden">
-    <div class="emergency-panel-header">
-      <h3>Emergency Services</h3>
-      <button id="closeEmergencyPanel" class="btn btn--sm close-btn">×</button>
-    </div>
-    <div class="emergency-panel-content">
-      <div class="emergency-disclaimer">
-        <p><strong>Important:</strong> In case of a real emergency, please dial the appropriate emergency number directly from your phone.</p>
-      </div>
-      <div id="emergencyServicesContainer" class="emergency-services-container">
-        <!-- Emergency services will be rendered here -->
-      </div>
-      <div class="emergency-categories">
-        <button class="emergency-category-btn active" data-category="all">All</button>
-        <button class="emergency-category-btn" data-category="police">Police</button>
-        <button class="emergency-category-btn" data-category="fire">Fire</button>
-        <button class="emergency-category-btn" data-category="medical">Medical</button>
-        <button class="emergency-category-btn" data-category="helpline">Helplines</button>
-        <button class="emergency-category-btn" data-category="disaster">Disaster</button>
-      </div>
-    </div>
-  </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i>📧</i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>your.email@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📱</i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 12345 67890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>📍</i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Your City, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i>💼</i>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <p>linkedin.com/in/yourprofile</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">नाम</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
-  <script src="api-integration.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 आपका नाम. All rights reserved. Made with ❤️ for Azure deployment.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message
+            alert('Message sent successfully! मैं जल्द ही reply करूंगा।');
+            
+            // Reset form
+            this.reset();
+            
+            // In real application, you would send this to your backend
+            console.log('Form data:', data);
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        console.log('🚀 Portfolio loaded successfully!');
+    </script>
 </body>
 </html>

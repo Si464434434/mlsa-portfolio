@@ -1,9 +1,62 @@
-# Azure Portfolio Deployment Guide
+# 🚀 Azure Portfolio Deployment - LIVE DEPLOYMENT!
 
-## Prerequisites
-- Azure Account (Free tier available)
-- Azure CLI installed
-- Git repository
+## ✅ CURRENT STATUS: Files Ready - GitHub Step Required
+
+### URGENT: GitHub Repository Creation (Browser में खुला है)
+🌐 **Action Required:** GitHub repository बनाएं
+
+**Fill these details:**
+- Repository name: `portfolio-website`
+- Description: `Professional Portfolio - Azure Static Web App`
+- ✅ Public repository
+- ❌ No README (हमारे पास already है)
+- Click **"Create repository"** button
+
+### Next: Connect Repository
+After GitHub repo creation, run these commands:
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/portfolio-website.git
+git branch -M main
+git push -u origin main
+```
+
+### Then: Azure Static Web App Creation
+https://portal.azure.com/#create/Microsoft.StaticApp
+
+**Perfect Configuration for $150 Credit:**
+- Resource Group: Create new "portfolio-rg"
+- Name: "sarthak-portfolio"
+- Plan: **FREE** (saves your credit!)
+- Region: **East US 2** 
+- Source: **GitHub**
+- Repository: portfolio-website
+- Branch: main
+- Build: **Custom**
+- App location: `/`
+
+## Cost Analysis with $150 Credit:
+- ✅ Static Web App: **$0/month** (FREE tier)
+- ✅ SSL Certificate: **$0/month** (included)
+- ✅ Global CDN: **$0/month** (included)
+- ✅ Custom Domain: **$0/month** (included)
+- **Total: $0/month = Your $150 credit lasts FOREVER!**
+
+## Files Ready for Deployment:
+✅ working-portfolio.html (guaranteed working version)
+✅ portfolio.html (advanced features)
+✅ portfolio-style.css (11.9 KB)
+✅ portfolio-script.js (10.6 KB)
+✅ staticwebapp.config.json
+✅ Git repository initialized and committed
+
+## Expected Results:
+- ⏱️ Deployment: 2-3 minutes
+- 🌐 Live URL: `https://sarthak-portfolio.azurestaticapps.net`
+- 📱 Mobile responsive
+- 🔒 HTTPS enabled
+- 🚀 Global CDN
+
+**Status: Ready for GitHub repository creation!**
 
 ## Method 1: Azure App Service + Azure Database for MySQL
 
