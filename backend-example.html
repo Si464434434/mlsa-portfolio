@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Integration Example - SIH 25031</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-pending { background-color: #ffc107; color: #000; }
+        .status-in-progress { background-color: #17a2b8; color: #fff; }
+        .status-resolved { background-color: #28a745; color: #fff; }
+        .status-closed { background-color: #6c757d; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>SIH 25031 - Backend Integration Example</h1>
+
+    <!-- Issue Report Form -->
+    <div class="form-container">
+        <h2>Report Issue</h2>
+        <form id="issueReportForm" data-api="issue">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Issue Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="road-infrastructure">Road & Infrastructure</option>
+                    <option value="water-supply">Water Supply</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="waste-management">Waste Management</option>
+                    <option value="public-transport">Public Transport</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="education">Education</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" placeholder="Area, City, State">
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Issue Description *</label>
+                <textarea id="description" name="description" rows="4" required placeholder="Describe the issue in detail..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="imageUrl">Image URL (optional)</label>
+                <input type="url" id="imageUrl" name="imageUrl" placeholder="https://example.com/image.jpg">
+            </div>
+            
+            <button type="submit">Submit Issue Report</button>
+        </form>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="form-container">
+        <h2>Submit Feedback</h2>
+        <form id="feedbackForm" data-api="feedback">
+            <div class="form-group">
+                <label for="feedback-name">Name *</label>
+                <input type="text" id="feedback-name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="feedback-email">Email *</label>
+                <input type="email" id="feedback-email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating">
+                    <option value="1">1 - Very Poor</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="3">3 - Average</option>
+                    <option value="4">4 - Good</option>
+                    <option value="5" selected>5 - Excellent</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="feedback-message">Feedback Message *</label>
+                <textarea id="feedback-message" name="message" rows="4" required placeholder="Share your feedback..."></textarea>
+            </div>
+            
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <!-- Admin Dashboard (Issues List) -->
+    <div class="form-container">
+        <h2>Admin Dashboard - Issues</h2>
+        <div id="issuesContainer">
+            <!-- Issues will be loaded here by JavaScript -->
+            <p>Loading issues...</p>
+        </div>
+    </div>
+
+    <!-- Include API Integration Script -->
+    <script src="api-integration.js"></script>
+</body>
+</html>

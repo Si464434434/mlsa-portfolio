@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Database
+*.sqlite
+*.db
+
+# Cache
+.cache/
+cache/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+public/build/
+
+# Azure
+.azure/
+local.settings.json
+
+# PHP
+composer.phar
+composer.lock
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Large files (will add to Git LFS if needed)
+*.exe
+*.zip
+*.rar
+
+# Personal files
+Profile.pdf
+*.personal.*

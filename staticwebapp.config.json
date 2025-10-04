@@ -1,0 +1,40 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/*",
+      "serve": "/portfolio.html",
+      "statusCode": 200
+    }
+  ],
+  "responseOverrides": {
+    "400": {
+      "redirect": "/error.html",
+      "statusCode": 200
+    },
+    "401": {
+      "redirect": "/login.html",
+      "statusCode": 200
+    },
+    "403": {
+      "redirect": "/error.html",
+      "statusCode": 200
+    },
+    "404": {
+      "redirect": "/portfolio.html",
+      "statusCode": 200
+    }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".pdf": "application/pdf"
+  }
+}

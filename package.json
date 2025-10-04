@@ -1,0 +1,30 @@
+{
+  "name": "azure-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website with Azure deployment",
+  "main": "index.php",
+  "scripts": {
+    "start": "php -S localhost:8000",
+    "deploy": "az webapp deployment source config-zip --resource-group portfolio-rg --name your-portfolio-app --src portfolio.zip",
+    "build": "zip -r portfolio.zip . -x '*.git*' 'node_modules/*' '*.md'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "php": ">=8.1"
+  },
+  "azure": {
+    "app_service": {
+      "name": "your-portfolio-app",
+      "resource_group": "portfolio-rg",
+      "location": "East US",
+      "runtime": "PHP|8.1"
+    },
+    "database": {
+      "server": "portfolio-mysql-server",
+      "name": "portfolio_db",
+      "tier": "Burstable",
+      "sku": "Standard_B1ms"
+    }
+  }
+}
