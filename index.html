@@ -600,6 +600,167 @@
             }
         }
 
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        /* Ambassador Badge */
+        .ambassador-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--gradient-primary);
+            padding: 0.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Skill Bars */
+        .skill-level {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+
+        .skill-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            transition: width 2s ease;
+        }
+
+        /* Timeline Styles */
+        .experience {
+            background: var(--gradient-dark);
+            padding: 5rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin: 0 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Certifications */
+        .certifications {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 5rem 0;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-menu {
@@ -642,6 +803,8 @@
                 <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
                 <li><a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#certifications" class="nav-link"><i class="fas fa-certificate"></i> Certifications</a></li>
                 <li><a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a></li>
                 <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
@@ -678,19 +841,63 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-aos="fade-up">About Sarthak Khare</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>मैं एक passionate web developer हूं जो modern technologies का उपयोग करके innovative web solutions बनाता हूं। मेरा experience frontend और backend दोनों में है।</p>
-                    <p>मैं हमेशा नई technologies सीखने और अपने skills को improve करने में interested रहता हूं। Clean, maintainable code लिखना और best practices follow करना मेरी priority है।</p>
-                    <p>मेरा goal है user-friendly applications बनाना जो न केवल functional हों बल्कि visually appealing भी हों।</p>
+                <div class="about-text" data-aos="fade-right">
+                    <div class="about-intro">
+                        <h3 class="glow-text">🚀 Microsoft Learn Student Ambassador & Tech Community Leader</h3>
+                        <p>मैं एक passionate Full Stack Developer और Microsoft Learn Student Ambassador हूं जो Jabalpur, Madhya Pradesh से है। RGPV University में Computer Science पढ़ रहा हूं और multiple tech communities में active leadership role निभाता हूं।</p>
+                    </div>
+                    
+                    <div class="stats-grid card-3d" style="margin: 2rem 0;">
+                        <div class="stat-item">
+                            <h4>11,000+</h4>
+                            <p>LinkedIn Followers</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>15+</h4>
+                            <p>Campus Ambassador Roles</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>5+</h4>
+                            <p>Professional Certifications</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>Level 2</h4>
+                            <p>Naukri Campus (674 points)</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info" style="margin: 1.5rem 0;">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>zscvhsatrt@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 7415081155</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/sarthak-khare-1044b328a</span>
+                        </div>
+                    </div>
+                    
                     <div class="about-buttons" style="margin-top: 2rem;">
-                        <a href="./Profile.pdf" class="btn btn-primary" target="_blank">📄 Complete Resume</a>
-                        <a href="#contact" class="btn btn-secondary">💬 Let's Connect</a>
+                        <a href="./Profile.pdf" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-download"></i> Complete Resume
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-comments"></i> Let's Connect
+                        </a>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="profile-img">
+                <div class="about-image" data-aos="fade-left">
+                    <div class="profile-img floating">
+                        <div class="ambassador-badge">
+                            <i class="fab fa-microsoft"></i>
+                            <span>MLSA</span>
+                        </div>
                         👨‍💻
                     </div>
                 </div>
@@ -701,23 +908,186 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
+            <h2 class="section-title" data-aos="fade-up">Professional Skills & Expertise</h2>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <i>🌐</i>
-                    <h3>Frontend</h3>
-                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Project Management</h3>
+                    <p>Leading student initiatives, managing timelines, coordinating campus events</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 90%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i>⚙️</i>
-                    <h3>Backend</h3>
-                    <p>Node.js, PHP, Python, Express.js</p>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="200">
+                    <i class="fas fa-users"></i>
+                    <h3>Program Management</h3>
+                    <p>Campus Ambassador programs, community engagement, team leadership</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 95%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i>🗄️</i>
-                    <h3>Database</h3>
-                    <p>MySQL, MongoDB, PostgreSQL</p>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="300">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Networking</h3>
+                    <p>Building professional connections, social media outreach, community building</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 92%"></div>
+                    </div>
                 </div>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="400">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Marketing Strategy</h3>
+                    <p>LinkedIn marketing, content creation, brand promotion campaigns</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="500">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>HTML5, CSS3, JavaScript, React, Node.js, Full Stack Development</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-card card-3d hover-lift" data-aos="flip-left" data-aos-delay="600">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Cybersecurity</h3>
+                    <p>Deloitte simulation experience, security analysis, risk assessment</p>
+                    <div class="skill-level">
+                        <div class="skill-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item card-3d" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Microsoft Learn Student Ambassador</h3>
+                        <h4>Microsoft Corporation</h4>
+                        <span class="timeline-date">2025 - Present</span>
+                        <p>Leading tech community initiatives, organizing coding workshops, and promoting Microsoft technologies across campus networks.</p>
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy"></i> International Recognition
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item card-3d" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Campus Ambassador</h3>
+                        <h4>Naukri Campus</h4>
+                        <span class="timeline-date">May 2025 - Present</span>
+                        <p>Promoted coding contests & job opportunities. Achieved Level 2 with 674 points. Received LOR + ₹1000 Amazon Voucher.</p>
+                        <div class="achievement-badge">
+                            <i class="fas fa-award"></i> Top Performer
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item card-3d" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Campus Ambassador</h3>
+                        <h4>GirlScript Summer of Code</h4>
+                        <span class="timeline-date">June 2025 - Present</span>
+                        <p>Encouraged open-source participation, mentored peers in beginner-friendly contributions, promoted coding projects.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item card-3d" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Campus Ambassador</h3>
+                        <h4>Techniche, IIT Guwahati</h4>
+                        <span class="timeline-date">July 2025 - Present</span>
+                        <p>Represented one of India's largest technical festivals, organized outreach campaigns, assisted in IIT-level events.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item card-3d" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Student Partner (ISP)</h3>
+                        <h4>Internshala</h4>
+                        <span class="timeline-date">Nov 2024 - Jan 2025</span>
+                        <p>Encouraged students to apply for online internships, helped peers navigate career options and resources.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Professional Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-card card-3d hover-lift" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="cert-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h3>Microsoft Learn Student Ambassador</h3>
+                    <p>2025</p>
+                    <span class="cert-type">Leadership & Community</span>
+                </div>
+
+                <div class="cert-card card-3d hover-lift" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="cert-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn Marketing Strategy</h3>
+                    <p>Professional Development</p>
+                    <span class="cert-type">Marketing & Networking</span>
+                </div>
+
+                <div class="cert-card card-3d hover-lift" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Deloitte Cyber Job Simulation</h3>
+                    <p>Australia Program</p>
+                    <span class="cert-type">Cybersecurity</span>
+                </div>
+
+                <div class="cert-card card-3d hover-lift" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="cert-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>LinkedIn Content & Creative Design</h3>
+                    <p>Content Strategy</p>
+                    <span class="cert-type">Design & Content</span>
+                </div>
+
+                <div class="cert-card card-3d hover-lift" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="cert-icon">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h3>Knight Certification</h3>
+                    <p>Specialized Program</p>
+                    <span class="cert-type">Professional Skills</span>
+                </div>
+            </div>
+        </div>
+    </section>
                 <div class="skill-card">
                     <i>☁️</i>
                     <h3>Cloud</h3>
