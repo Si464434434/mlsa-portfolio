@@ -126,19 +126,53 @@ class PortfolioData {
         return $result;
     }
     
-    // Azure Cache implementation
+    // Azure Cache implementation (Session-based - No undefined functions)
     private function getFromCache($key) {
-        // Use Azure Redis Cache in production
-        if (function_exists('apcu_fetch')) {
-            return apcu_fetch($key);
+        // Primary: Session-based cache (always available)
+        if (session_status() == PHP_SESSION_NONE) {
+            @session_start();
         }
+        
+        if (isset($_SESSION['cache'][$key])) {
+            $cache = $_SESSION['cache'][$key];
+            if ($cache['expires'] > time()) {
+                return $cache['data'];
+            } else {
+                unset($_SESSION['cache'][$key]);
+            }
+        }
+        
         return false;
     }
     
     private function setCache($key, $value, $ttl) {
-        // Use Azure Redis Cache in production
-        if (function_exists('apcu_store')) {
-            apcu_store($key, $value, $ttl);
+        // Primary: Session-based cache (always available)
+        if (session_status() == PHP_SESSION_NONE) {
+            @session_start();
+        }
+        
+        if (!isset($_SESSION['cache'])) {
+            $_SESSION['cache'] = [];
+        }
+        
+        $_SESSION['cache'][$key] = [
+            'data' => $value,
+            'expires' => time() + $ttl
+        ];
+        
+        // Optional: Log cache usage for Azure monitoring
+        error_log("Cache SET: $key (TTL: {$ttl}s)");
+    }
+    
+    // Missing logVisit method - Added
+    public function logVisit($page, $userAgent) {
+        try {
+            $sql = "INSERT INTO page_visits (page, user_agent, ip_address, visit_time) VALUES (?, ?, ?, NOW())";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([$page, $userAgent, $this->getClientIP()]);
+        } catch (Exception $e) {
+            error_log("Log visit error: " . $e->getMessage());
+            return false;
         }
     }
     
